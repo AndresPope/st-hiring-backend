@@ -16,12 +16,14 @@ const TicketDAL = createTicketDAL(Knex);
 const app = express();
 
 app.use('/health', (req, res) => {
+app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.use('/events', createGetEventsController({ eventsDAL: eventDAL, ticketsDAL: TicketDAL }));
+app.get('/events', createGetEventsController({ eventsDAL: eventDAL, ticketsDAL: TicketDAL }));
 
 app.use('/', (_req, res) => {
+app.get('/', (_req, res) => {
   res.json({ message: 'Hello API' });
 });
 
