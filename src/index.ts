@@ -5,6 +5,7 @@ import { createEventDAL } from './dal/events.dal';
 import { createTicketDAL } from './dal/tickets.dal';
 import { createGetEventsController } from './controllers/get-events';
 import { connectDatabase } from './database/mongo/connection';
+import { createGetSettingsByClientId } from './controllers/get-settings-by-client-id';
 
 // initialize Knex
 const Knex = knex(dbConfig.development);
@@ -15,14 +16,14 @@ const TicketDAL = createTicketDAL(Knex);
 
 const app = express();
 
-app.use('/health', (req, res) => {
+app.get('/settings/:clientId', createGetSettingsByClientId());
+
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
 app.get('/events', createGetEventsController({ eventsDAL: eventDAL, ticketsDAL: TicketDAL }));
 
-app.use('/', (_req, res) => {
 app.get('/', (_req, res) => {
   res.json({ message: 'Hello API' });
 });
