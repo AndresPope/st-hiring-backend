@@ -14,6 +14,7 @@ export const updateSettingsByClientId = async (req: Request, res: Response) => {
 
     if (!clientId || isNaN(clientId)) {
       res.status(400).send('Invalid clientId');
+      return;
     }
 
     const settingsInput = SettingInputSchema.safeParse(body);
@@ -37,6 +38,7 @@ export const updateSettingsByClientId = async (req: Request, res: Response) => {
       message: 'Settings updated successfully',
       settings: settingsInput.data,
     });
+    return;
   } catch (e) {
     console.error('Error in update-settings-by-client-id:', e);
     res.status(500).send('Internal Server Error');
