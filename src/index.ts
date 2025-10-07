@@ -1,5 +1,6 @@
 import express from 'express';
 import { knex } from 'knex';
+import cors from 'cors';
 import dbConfig from './knexfile';
 import { createEventDAL } from './dal/events.dal';
 import { createTicketDAL } from './dal/tickets.dal';
@@ -18,6 +19,7 @@ const TicketDAL = createTicketDAL(Knex);
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/settings/:clientId', getSettingsByClientId);
 
