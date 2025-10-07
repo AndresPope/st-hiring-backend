@@ -16,6 +16,8 @@ const TicketDAL = createTicketDAL(Knex);
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/settings/:clientId', createGetSettingsByClientId());
 
 app.get('/health', (req, res) => {
