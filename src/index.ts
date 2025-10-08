@@ -16,7 +16,7 @@ const Knex = knex(dbConfig.development);
 const eventDAL = createEventDAL(Knex);
 const TicketDAL = createTicketDAL(Knex);
 
-const app = express();
+export const app = express();
 
 app.use(express.json());
 app.use(cors());

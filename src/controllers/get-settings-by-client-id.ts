@@ -9,6 +9,7 @@ export const getSettingsByClientId = async (req: Request, res: Response) => {
     const clientId = Number(paramClientId);
     if (!clientId || isNaN(clientId)) {
       res.status(400).send('Invalid clientId');
+      return;
     }
 
     const db = getDbInstance();
